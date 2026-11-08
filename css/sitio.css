@@ -131,3 +131,40 @@ main > section#apadrinar { height: auto; min-height: 100vh; min-height: 100svh; 
   .footer ul { gap: 0; }
   .footer ul a, .footer .credits, .footer .nav__logo, a.link { display: inline-flex; align-items: center; min-height: 44px; }
 }
+
+/* ==========================================================================
+   Secciones compactas
+   El kit hace cada sección exactamente una o dos pantallas de alto. Aquí cada
+   sección mide lo que mide su contenido, con un margen fijo arriba y abajo.
+   La portada (.hero) sigue ocupando la primera pantalla, y los momentos de
+   scroll (pinned-chapters, photo-chapters) mantienen su altura mientras
+   están activos (.is-live), porque la necesitan para funcionar.
+   ========================================================================== */
+:root { --sec-pad: 88px; }
+@media (max-width: 1023px) { :root { --sec-pad: 72px; } }
+@media (max-width: 639px)  { :root { --sec-pad: 56px; } }
+
+main > :is(section, .section):not(.hero, .is-live),
+footer.closing {
+  height: auto !important;
+  min-height: 0 !important;
+  padding-top: var(--sec-pad);
+  padding-bottom: calc(var(--sec-pad) + var(--bar, 0px));
+}
+main > :is(section, .section):not(.hero, .is-live) > :is(.wrap, .container),
+footer.closing > .wrap { height: auto; }
+
+/* Secciones en dos grupos (.g2): los grupos van seguidos, sin saltar de pantalla */
+main > :is(section, .section).g2:not(.is-live) > :is(.wrap, .container),
+footer.closing.g2 > .wrap {
+  display: flex; flex-direction: column; grid-template-rows: none; row-gap: var(--s-8);
+}
+
+/* Bloques que llenaban "lo que quedaba de pantalla": ahora toman su propia altura */
+main > :is(section, .section):not(.hero) > .wrap > .fill { flex: none; }
+
+/* Dos secciones seguidas sobre el mismo fondo comparten el margen: no se suma dos veces */
+main > :is(section, .section):not(.hero, [class*="ground-"]) + :is(section, .section):not([class*="ground-"], .is-live) { padding-top: calc(var(--sec-pad) * .5); }
+
+/* El pie: la llamada final y los enlaces, juntos */
+footer.closing > .wrap { display: flex; flex-direction: column; row-gap: var(--s-9); }

@@ -82,7 +82,7 @@
 @media (max-width: 1023px) { #pinguinos .tile__media { --tile-ratio: 1 / 1; } }
 @media (max-width: 639px) { main > #como[data-moment]:not(.is-live) { min-height: 200vh; min-height: 200lvh; } }
 /* La rejilla ocupa dos pantallas: la segunda fila arranca como una sección nueva */
-@media (min-width: 1024px) { #rejilla-pinguinos { row-gap: 232px; } }
+/* (antes 232px para cuadrar pantallas; ahora las secciones son compactas: ver sitio.css) */
 
 /* Telefono: en el clima y las zonas el valor ("más de 2000 mm") baja bajo su nombre en vez de salirse de la columna */
 @media (max-width: 639px) {
